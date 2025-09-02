@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MatrixCalc — матричный калькулятор</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+<header class="site-header">
+    <div class="brand">MatrixCalc</div>
+    <nav class="nav">
+        <button class="nav-btn" data-target="operations">Операции</button>
+        <button class="nav-btn" data-target="guide">Инструкция</button>
+        <button class="nav-btn" data-target="about">О нас</button>
+    </nav>
+</header>
+
+<main>
+    <!-- Секция операций -->
+    <section id="operations-section" class="content-section">
+        <div class="controls">
+            <div class="size-group">
+                <strong>Размер A:</strong>
+                <input id="rowsA-input" type="number" min="1" max="10" value="2" />
+                ×
+                <input id="colsA-input" type="number" min="1" max="10" value="2" />
+            </div>
+            <div class="size-group">
+                <strong>Размер B:</strong>
+                <input id="rowsB-input" type="number" min="1" max="10" value="2" />
+                ×
+                <input id="colsB-input" type="number" min="1" max="10" value="2" />
+            </div>
+            <button id="apply-size">Применить</button>
+        </div>
+
+        <div class="matrices-container">
+            <div class="matrix-container">
+                <h3>Матрица A</h3>
+                <div id="matrixA" class="matrix-grid"></div>
+            </div>
+            <div class="matrix-container">
+                <h3>Матрица B</h3>
+                <div id="matrixB" class="matrix-grid"></div>
+            </div>
+        </div>
+
+        <div id="operations" class="operations-buttons"></div>
+
+        <div class="result-container">
+            <h3>Результат</h3>
+            <div id="result"></div>
+        </div>
+
+        <article class="ops-info left-rail">
+            <h3>Основные операции над матрицами</h3>
+            <ul>
+                <li><strong>Сложение (A + B)</strong>: складываются матрицы одинакового размера.</li>
+                <li><strong>Вычитание (A − B)</strong>: вычитаются матрицы одинакового размера </li>
+                <li><strong>Умножение (A × B)</strong>: возможно, если число столбцов A равно числу строк B.</li>
+                <li><strong>Транспонирование Transpose(A)</strong>: строки становятся столбцами.</li>
+                <li><strong>Детерминант det(A)</strong>: только для квадратных матриц.
+                    Для СЛАУ показывает единственность решения.
+                </li>
+                <li><strong>Обратная (A⁻¹)</strong>: существует, если det(A) ≠ 0.</li>
+                <li><strong>Степень (A^k)</strong>: матрица умножается сама на себя k раз (например, A², A³).</li>
+            </ul>
+        </article>
+    </section>
+
+
+      <!-- Секция инструкции -->
+    <section id="guide-section" class="content-section" >
+        <h2>Инструкция</h2>
+        <ol>
+            <li>Выберите размеры A и B, нажмите «Применить».</li>
+            <li>Заполните элементы матриц A и B.</li>
+            <li>Выберите операцию; результат отобразится ниже.</li>
+        </ol>
+    </section>
+
+
+    <!-- Секция о нас -->
+    <section id="about-section" class="content-section" hidden>
+        <h2>Наши cоциальные сети</h2>
+
+        <ul class = contacts>
+            <li><a href="https://t.me/MatrixCalculator" target="_blank" rel = noopener>Telegram</a></li>
+            <li><a href="https://vk.com/matrix_calculator" target="_blank" rel = noopener>VK</a></li>
+            <li><a href="https://github.com/MatrixCalculator" target="_blank" rel = noopener>Github </a></li>
+        </ul>
+
+    </section>
+
+
+    <!-- Секция учебник -->
+    <section id="learn-section" class="content-section left-rail ">
+        <h2>Матрицы и операции</h2>
+
+        <p><strong>Матрица</strong> — прямоугольная таблица чисел. Обозначаем большими круглыми скобками.
+        </p>
+
+        <p><em>Пример:</em> Матрица A размера 2×2:
+            <span class="pmatrix" style="--cols:2">
+      <span class="paren left">
+        <svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </span>
+      <span class="cells"><span>1</span><span>2</span><span>3</span><span>4</span></span>
+      <span class="paren right">
+        <svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </span>
+    </span>
+            . Элементы матрицы A обозначаются aij, где i - номер строки, в которой находится элемент, j - номер столбца.
+        </p>
+
+        <h3>Сложение и вычитание</h3>
+        <p>Операция сложения и вычитания матриц вводится для матриц одинакового размера.
+            Суммой двух матриц Aij и Bij называется матрица Cij,где cij = aij + bij.Записывают так: C = A + B.
+            Аналогично определяется разность матриц.
+            <p><em>Пример:</em></p>
+        <p>
+    <span class="pmatrix" style="--cols:2">
+      <span class="paren left"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="cells"><span>1</span><span>2</span><span>3</span><span>4</span></span>
+      <span class="paren right"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </span>
+            +
+            <span class="pmatrix" style="--cols:2">
+      <span class="paren left"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="cells"><span>5</span><span>6</span><span>7</span><span>8</span></span>
+      <span class="paren right"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </span>
+            =
+            <span class="pmatrix" style="--cols:2">
+      <span class="paren left"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="cells"><span>6</span><span>8</span><span>10</span><span>12</span></span>
+      <span class="paren right"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </span>
+        </p>
+
+        <h3>Умножение</h3>
+        <p>Возможно, если число столбцов A равно числу строк B.
+            Произведением двух матриц А(n x m)  и В(m x k) называется матрица С(n x k), где
+            сik = ai1 * b1k + ai2 * b2k + ... + aik * bk1 + aik * bk2 + ... + aik * bkk.
+            Записывается так: C = A * B.
+
+            <span class="pmatrix" style="--cols:2">
+      <span class="paren left"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="cells"><span>a11</span><span>a12</span><span>a21</span><span>a22</span></span>
+      <span class="paren right"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </span>
+            ×
+            <span class="pmatrix" style="--cols:2">
+      <span class="paren left"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="cells"><span>b11</span><span>b12</span><span>b21</span><span>b22</span></span>
+
+      <span class="paren right"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </span>
+            =
+            <span class="pmatrix" style="--cols:3">
+      <span class="paren left"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="cells"><span>(a11*b11 + a12*b21) </span><span> (a11*b12 + a12*b22)</span><span>(a21*b11 + a22*b21) </span><span> (a21*b12 + a22*b22)</span></span>
+      <span class="paren right"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </span>
+        </p>
+
+            <p><em>Пример:</em></p>
+        <p>
+    <span class="pmatrix" style="--cols:2">
+      <span class="paren left"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="cells"><span>1</span><span>2</span><span>3</span><span>4</span></span>
+      <span class="paren right"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </span>
+            ×
+            <span class="pmatrix" style="--cols:2">
+      <span class="paren left"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="cells"><span>5</span><span>6</span><span>7</span><span>8</span></span>
+      <span class="paren right"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </span>
+            =
+            <span class="pmatrix" style="--cols:2">
+      <span class="paren left"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="cells"><span>19</span><span>22</span><span>43</span><span>50</span></span>
+      <span class="paren right"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </span>
+        </p>
+
+        <h3>Транспонирование</h3>
+        <p>Строки становятся столбцами.</p>
+        <p>
+                   <span class="pmatrix" style="--cols:2">
+      <span class="paren left"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="cells"><span>1</span><span>2</span><span>3</span><span>4</span></span>
+      <span class="paren right"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </span>
+            =>
+    <span class="pmatrix" style="--cols:2">
+      <span class="paren left"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="cells"><span>1</span><span>3</span><span>2</span><span>4</span></span>
+      <span class="paren right"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </span>
+        </p>
+        <h3>Элементарные преобразования</h3>
+        <ol>
+            <li>Перестановка местами двух параллельных строк/столбцов матрицы.</li>
+            <li>Умножение всех элементов ряда матрицы на число, отличное от 0.</li>
+            <li>Прибавление к одному ряду матрицы параллельного ряда, умноженного на число, отличное от 0.</li>
+        </ol>
+        <h3>Детерминант, обратная, ранг, степень</h3>
+        <ul>
+            <li><strong>det(A)</strong>
+                —  числовой коэффициент который показывает, во сколько раз линейное преобразование изменяет объём (или площадь) пространства, а также указывает на сохранение или изменение его ориентации.
+                <p><em>Пример:</em></p>
+               det<span class="pmatrix" style="--cols:2">
+      <span class="paren left"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="cells"><span>1</span><span>2</span><span>3</span><span>4</span></span>
+      <span class="paren right"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </span>= (1 * 4) - (3 * 2) =−2.</li>
+            <li><strong>A⁻¹</strong> существует, если det(A)≠0. Произведение A и A⁻¹ равно единичной матрице.</li>
+            <li><strong>rank(A)</strong> — число линейно независимых строк/столбцов матрицы.
+               Rank<span class="pmatrix" style="--cols:2">
+      <span class="paren left"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M8,2 C3,20 3,80 8,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      <span class="cells"><span>1</span><span>2</span><span>2</span><span>4</span></span>
+      <span class="paren right"><svg viewBox="0 0 10 100" preserveAspectRatio="none"><path d="M2,2 C7,20 7,80 2,98" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </span> = 1.</li>
+            <li><strong>A^k</strong> — умножение матрицы самой на себя определенное количество раз (A², A³, …).</li>
+        </ul>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <small>© 2025 MatrixCalc</small>
+</footer>
+
+<script src="operations.js"></script>
+<script src="app.js" defer></script>
+</body>
+</html>
