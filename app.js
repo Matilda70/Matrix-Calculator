@@ -328,20 +328,28 @@ async function onPowA() {
         const mod = await ensureModule();
         const A = getMatrixData('matrixA');
         if (A.rows !== A.cols) {
-            showError('A^k: матрица должна быть квадратной.');
+            showError('Возведение в степень доступно только для квадратных матриц.');
             return;
         }
-        const k = parseInt(document.getElementById('power-exp').value || '2', 10);
-        if (!Number.isFinite(k)) {
-            showError('Введите целую степень k.');
+        const kInput = document.getElementById('power-exp');
+        const k = parseInt(kInput?.value ?? '2', 10);
+        if (!Number.isInteger(k)) {
+            showError('Степень k должна быть целым числом.');
+            return;
+        }
+        if (!mod || !mod.power) {
+            showError('WASM ещё не готов или power() не экспортирован. Проверьте сборку с power_m.');
             return;
         }
         const aPtr = toWasmMatrix(mod, A);
         const rPtr = mod.power(aPtr, k);
-        const out = fromWasmMatrix(mod, rPtr);
+        const out  = fromWasmMatrix(mod, rPtr);
         showMatrix(out);
         mod.destroyMatrix(aPtr); mod.destroyMatrix(rPtr);
-    } catch (e) { console.error(e); showError('Ошибка при возведении в степень.'); }
+    } catch (e) {
+        console.error(e);
+        showError('Ошибка при возведении в степень.');
+    }
 }
 async function onRankA() {
     try {
@@ -376,7 +384,10 @@ function renderPMatrix(data, cls = "") {
     </span>`;
     return wrap;
 }
-createModule({ locateFile: (p) => './' + p })
+ModuleReady = createModule({
+    locateFile: (p) => p.endsWith('.wasm') ? './operations.wasm?v=2' : './' + p
+}).then(/*...*/);
+
 
 
 window.addEventListener('load', initWasm);
