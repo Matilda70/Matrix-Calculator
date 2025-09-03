@@ -376,9 +376,7 @@ function renderPMatrix(data, cls = "") {
     </span>`;
     return wrap;
 }
-ModuleReady = createModule({
-    locateFile: (path) => './' + path   // operations.wasm лежит рядом с operations.js
-}).then(/* ... */);
+createModule({ locateFile: (p) => './' + p })
 
 
 window.addEventListener('load', initWasm);
